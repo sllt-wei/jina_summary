@@ -3,12 +3,14 @@ import os
 import html
 from urllib.parse import urlparse
 import requests
+from altair.utils.plugin_registry import Plugin
 from zhipuai import ZhipuAI
 import plugins
 from bridge.context import ContextType
 from bridge.reply import Reply, ReplyType
 from common.log import logger
 from plugins import *
+
 
 @plugins.register(
     name="JinaSummary",
@@ -19,7 +21,6 @@ from plugins import *
     author="sllt",
 )
 class JinaSummary(Plugin):
-
     jina_reader_base = "https://r.jina.ai"
     open_ai_api_base = "https://api.openai.com/v1"
     open_ai_model = "gpt-3.5-turbo"
