@@ -18,7 +18,7 @@ from plugins import *
     version="0.0.1",
     author="sllt",
 )
-class JinaSum(Plugin):
+class JinaSummary(Plugin):
 
     jina_reader_base = "https://r.jina.ai"
     open_ai_api_base = "https://api.openai.com/v1"
@@ -53,11 +53,11 @@ class JinaSum(Plugin):
             self.black_url_list = self.config.get("black_url_list", self.black_url_list)
 
             # 加载智谱配置（直接从同一配置文件中加载）
-            logger.info(f"[JinaSum] Initialized with config: {self.config}")
+            logger.info(f"[JinaSummary] Initialized with config: {self.config}")
             self.handlers[Event.ON_HANDLE_CONTEXT] = self.on_handle_context
         except Exception as e:
-            logger.error(f"[JinaSum] Initialization error: {e}")
-            raise "[JinaSum] init failed, ignoring"
+            logger.error(f"[JinaSummary] Initialization error: {e}")
+            raise "[JinaSummary] init failed, ignoring"
 
     def on_handle_context(self, e_context: EventContext, retry_count: int = 0):
         try:
@@ -66,10 +66,10 @@ class JinaSum(Plugin):
             if context.type != ContextType.SHARING and context.type != ContextType.TEXT:
                 return
             if not self._check_url(content):
-                logger.debug(f"[JinaSum] {content} is not a valid URL, skipping")
+                logger.debug(f"[JinaSummary] {content} is not a valid URL, skipping")
                 return
             if retry_count == 0:
-                logger.debug("[JinaSum] on_handle_context. Content: %s" % content)
+                logger.debug("[JinaSummary] on_handle_context. Content: %s" % content)
                 reply = Reply(ReplyType.TEXT, "🎉正在为您生成总结，请稍候...")
                 channel = e_context["channel"]
                 channel.send(reply, context)
@@ -89,11 +89,11 @@ class JinaSum(Plugin):
 
         except Exception as e:
             if retry_count < 3:
-                logger.warning(f"[JinaSum] {str(e)}, retrying {retry_count + 1}")
+                logger.warning(f"[JinaSummary] {str(e)}, retrying {retry_count + 1}")
                 self.on_handle_context(e_context, retry_count + 1)
                 return
 
-            logger.exception(f"[JinaSum] {str(e)}")
+            logger.exception(f"[JinaSummary] {str(e)}")
             reply = Reply(ReplyType.ERROR, "我暂时无法总结链接，请稍后再试")
             e_context["reply"] = reply
             e_context.action = EventAction.BREAK_PASS
@@ -101,7 +101,7 @@ class JinaSum(Plugin):
     def _get_zhipu_summary(self, target_url_content):
         """使用智谱模型生成内容总结"""
         if not self.zhipu_api_key:
-            raise ValueError("[JinaSum] 未配置智谱API密钥")
+            raise ValueError("[JinaSummary] 未配置智谱API密钥")
         client = ZhipuAI(api_key=self.zhipu_api_key)
         target_url_content = target_url_content[:self.max_words]
         sum_prompt = f"{self.prompt}\n\n'''{target_url_content}'''"
