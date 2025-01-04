@@ -1,1 +1,1 @@
-from .jina_summary import *
+from .jina_sum import *
