@@ -11,7 +11,7 @@ from common.log import logger
 from plugins import *
 
 @plugins.register(
-    name="sllt",
+    name="junSummary",
     desire_priority=10,
     hidden=False,
     desc="Sum url link content with jina reader and llm",
