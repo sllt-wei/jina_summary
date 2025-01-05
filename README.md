@@ -1,6 +1,6 @@
 # jina_sumary
-ChatGPT on WeChat项目插件, 使用jina reader和ChatGPT和智谱总结网页链接内容
-
+ChatGPT on WeChat项目插件, 使用jina reader和ChatGPT以及智谱总结网页链接内容
+不配置ChatGPT时，配置智谱就可以调用智谱免费模型glm-4-flash
 支持总结公众号、小红书、csdn等分享卡片链接(有的卡片链接会触发验证，一般直链没有此问题)
 
 ![wechat_mp](./docs/images/wechat_mp.jpg)
