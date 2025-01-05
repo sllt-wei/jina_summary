@@ -1,5 +1,5 @@
 # jina_sumary
-ChatGPT on WeChat项目插件, 使用jina reader和ChatGPT总结网页链接内容
+ChatGPT on WeChat项目插件, 使用jina reader和ChatGPT和智谱总结网页链接内容
 
 支持总结公众号、小红书、csdn等分享卡片链接(有的卡片链接会触发验证，一般直链没有此问题)
 
@@ -14,6 +14,9 @@ config.json 配置说明
   "open_ai_api_base": "https://api.openai.com/v1",   # chatgpt chat url
   "open_ai_api_key":  "sk-xxx",                      # chatgpt api key
   "open_ai_model": "gpt-3.5-turbo",                  # chatgpt model
+  "zhipu_api_key": "",                               # 智谱api key
+  "zhipu_model": "glm-4-flash",                      # 智谱 model
+  "zhipu_api_base": "https://open.bigmodel.cn/api/paas/v4", #智谱 url
   "max_words": 8000,                                 # 网页链接内容的最大字数，防止超过最大输入token，使用字符串长度简单计数
   "white_url_list": [],                              # url白名单, 列表为空时不做限制，黑名单优先级大于白名单，即当一个url既在白名单又在黑名单时，黑名单生效
   "black_url_list": ["https://support.weixin.qq.com", "https://channels-aladin.wxqcloud.qq.com"],  # url黑名单，排除不支持总结的视频号等链接
