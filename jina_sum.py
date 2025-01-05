@@ -3,7 +3,6 @@ import os
 import html
 from urllib.parse import urlparse
 import requests
-from altair.utils.plugin_registry import Plugin
 from zhipuai import ZhipuAI
 import plugins
 from bridge.context import ContextType
